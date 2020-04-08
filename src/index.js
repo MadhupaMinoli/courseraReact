@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Menu from './Components/MenuComponent';
+
 
 
 // const name = 'Josh Perez';
@@ -132,8 +132,8 @@ import Menu from './Components/MenuComponent';
 // };
 ReactDOM.render(
   <React.StrictMode>
- <App />
-</React.StrictMode>,
+    <App />
+  </React.StrictMode>,
   document.getElementById('root')
 );
 // If you want your app to work offline and load faster, you can change
