@@ -3,6 +3,7 @@ import { Navbar, NavbarBrand } from 'reactstrap';
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
 import DishDetail from './DishdetailComponent';
+import About from './AboutComponent';
 
 import Home from './HomeComponent'
 import Header from './HeaderComponent';
@@ -46,6 +47,11 @@ return(
     />
 )
     }
+    const AboutUs=()=>{
+return(
+    <About leaders={this.state.leaders}/>
+)
+    }
 
 
     const DishWithId = ({match}) => {
@@ -63,7 +69,8 @@ return(
             <Route path='/Home' component={HomePage}/>
             <Route exact path='/Menu' component={()=> <Menu dishes={this.state.dishes}/>}/>
             <Route path='/menu/:dishId' component={DishWithId} />            
-            <Route exact path='/Contact' component={Contact}/>            
+            <Route exact path='/Contact' component={Contact}/>    
+            <Route exact path='/About' component={AboutUs}/>           
             <Redirect to='/Home' />           
         </Switch>
         
