@@ -1,20 +1,18 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl'
+import { Loading } from './LoadingComponent';
+import { Fade, Stagger } from "react-animation-components";
 
 function About(props) {
 
-    const leaders = props.leaders.map((lead) => {
-        return (
-            <RenderLeader leader={lead} />
-        );
-    });
 
     function RenderLeader({ leader }) {
         return (
             <Media tag="li">
                 <Media left>
-                    <Media object src={leader.image} alt={leader.name} />
+                    <Media object src={baseUrl + leader.image} alt={leader.name} />
                 </Media>
                 <Media body className="ml-5">
                     <Media heading>
@@ -29,8 +27,29 @@ function About(props) {
         );
     }
 
+    function RenderContent({ leaders, isLoading, errMess }) {
+        if (isLoading) {
+            return <Loading />;
+        } else if (errMess) {
+            return <h4>{errMess}</h4>;
+        } else
+            return (
+                <div>
+
+                    <Stagger in>
+                        {leaders.map(leader => (
+                            <Fade in>
+                                <RenderLeader key={leader.id} leader={leader} />
+                            </Fade>
+                        ))}
+                    </Stagger>
+                </div>
 
 
+
+
+            );
+    }
 
     return (
         <div className="container">
@@ -86,10 +105,15 @@ function About(props) {
                 <div className="col-12">
                     <h2>Corporate Leadership</h2>
                 </div>
+
                 <div className="col-12">
-                    
-                        {leaders}
-                    
+
+                    <RenderContent
+                        leaders={props.leaders}
+                        isLoading={props.isLoading}
+                        errMess={props.ErrMess}
+                    />
+
                 </div>
             </div>
         </div>
